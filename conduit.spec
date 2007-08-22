@@ -66,6 +66,7 @@ perl -pi -e 's,\$\(libdir\)/pkgconfig,\$\(datadir\)/pkgconfig,g' data/Makefile.a
 # ...and correct the paths in it to match the changes we made above
 perl -pi -e 's,\@libdir\@/conduit/dataproviders,\@exec_prefix\@/lib/conduit/dataproviders,g' data/conduit.pc.in
 
+# correct start_conduit.py for the changes made above
 perl -pi -e 's.LIBDIR, \$libdir.LIBDIR, \$exec_prefix/lib.g' configure.ac
 perl -pi -e 's.PKGLIBDIR, \$libdir/\$PACKAGE.PKGLIBDIR, \$exec_prefix/lib/\$PACKAGE.g' configure.ac
 
