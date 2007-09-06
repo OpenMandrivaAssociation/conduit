@@ -4,7 +4,7 @@
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %endif
 
 Summary:	Synchronization solution for GNOME
@@ -32,6 +32,8 @@ BuildRequires:	gnome-common
 %endif
 BuildArch:	noarch
 Requires:	python-sqlite
+Requires:	python-pygoocanvas
+Requires:	python-vobject
 Suggests:	avahi-python
 Suggests:	python-twisted
 
