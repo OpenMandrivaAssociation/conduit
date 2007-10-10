@@ -1,10 +1,10 @@
 %define name	conduit
-%define version	0.3.3
+%define version	0.3.4
 %define svn	0
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 2
+%define release	%mkrel 1
 %endif
 
 Summary:	Synchronization solution for GNOME
