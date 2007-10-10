@@ -79,7 +79,7 @@ perl -pi -e 's,conduit-icon.png,%{name},g' data/conduit.desktop.in.in
 %if %svn
 sh ./autogen.sh
 %else
-autoreconf
+automake
 %endif
 %configure2_5x
 %make
