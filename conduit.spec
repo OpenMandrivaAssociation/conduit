@@ -26,7 +26,7 @@ BuildRequires:	python
 BuildRequires:	perl-XML-Parser
 BuildRequires:	dbus-devel
 BuildRequires:	intltool
-BuildRequires:	ImageMagick
+BuildRequires:	gnome-doc-utils
 %if %svn
 BuildRequires:	gnome-common
 %endif
