@@ -70,16 +70,15 @@ perl -pi -e 's,\@libdir\@/conduit/dataproviders,\@exec_prefix\@/lib/conduit/data
 
 # correct start_conduit.py for the changes made above
 perl -pi -e 's.LIBDIR, \$libdir.LIBDIR, \$exec_prefix/lib.g' configure.ac
-perl -pi -e 's.PKGLIBDIR, \$libdir/\$PACKAGE.PKGLIBDIR, \$exec_prefix/lib/\$PACKAGE.g' configure.ac
-
-# correct icon name
-perl -pi -e 's,conduit-icon.png,%{name},g' data/conduit.desktop.in.in
 
 %build
 %if %svn
 sh ./autogen.sh
 %else
-automake
+# redefinition of ACLOCAL is needed because conduit ships its own
+# Awsum Hax0reD .m4 files and a normal aclocal uses the standard ones
+# and breaks build. - AdamW 2007/10
+ACLOCAL="aclocal -I ./m4" autoreconf
 %endif
 %configure2_5x
 %make
@@ -87,12 +86,6 @@ automake
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-
-# icons
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-install -m 644 data/conduit-icon.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-convert -scale 32 data/conduit-icon.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert -scale 16 data/conduit-icon.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 %find_lang %{name}
 
@@ -110,16 +103,18 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS NEWS README TODO
-%{_bindir}/start_conduit
+%{_bindir}/%{name}
+%{_bindir}/%{name}-client
+%{_bindir}/%{name}.real
 %{py_puresitedir}/%{name}
 %{_prefix}/lib/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pkgconfig/%{name}.pc
-%{_datadir}/dbus-1/services/org.gnome.Conduit.service
-%{_datadir}/gnome/autostart/conduit-autostart.desktop
-%{_datadir}/pixmaps/conduit-icon.png
-%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+%{_datadir}/dbus-1/services/org.%{name}.service
+%{_datadir}/gnome/autostart/%{name}-autostart.desktop
+%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/hicolor/*/*/*.svg
+%{_datadir}/gnome/help/%{name}
+%{_datadir}/omf/%{name}
 
