@@ -4,7 +4,7 @@
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %endif
 
 Summary:	Synchronization solution for GNOME
@@ -19,6 +19,9 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://files.conduit-project.org/releases/%{name}-%{version}.tar.gz
 %endif
+# From upstream SVN - rickety fix to find Mozilla path for the internal
+# browser. Probably works okay, most of the time... - AdamW 2007/10
+Patch0:		conduit-0.3.4-mozpath.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -55,6 +58,7 @@ your own webserver, and more.
 %setup -q -n %{name}
 %else
 %setup -q
+%patch0 -p1 -b .mozpath
 %endif
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
