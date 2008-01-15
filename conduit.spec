@@ -1,10 +1,10 @@
 %define name	conduit
-%define version	0.3.4
+%define version	0.3.5
 %define svn	0
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 3
+%define release	%mkrel 1
 %endif
 
 Summary:	Synchronization solution for GNOME
@@ -17,11 +17,8 @@ URL:		http://www.conduit-project.org/
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://files.conduit-project.org/releases/%{name}-%{version}.tar.gz
+Source0:	http://files.conduit-project.org/releases/%{name}-%{version}.tar.bz2
 %endif
-# From upstream SVN - rickety fix to find Mozilla path for the internal
-# browser. Probably works okay, most of the time... - AdamW 2007/10
-Patch0:		conduit-0.3.4-mozpath.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -38,9 +35,14 @@ Requires:	python-sqlite
 Requires:	python-pygoocanvas
 Requires:	python-vobject
 Requires:	python-pyxml
+Requires:	gnome-python-gtkmozembed
+Requires:	gnome-python-desktop
 Suggests:	avahi-python
 Suggests:	python-twisted
-
+Suggests:	python-libgmail
+Suggests:	python-gpod
+Suggests:	ffmpeg
+Suggests:	mencoder
 
 %description
 Conduit is a synchronization solution for GNOME which allows the user
@@ -59,19 +61,18 @@ your own webserver, and more.
 %setup -q -n %{name}
 %else
 %setup -q
-%patch0 -p1 -b .mozpath
 %endif
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
-perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/dataproviders/Makefile.am
-perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/dataproviders/*/Makefile.am
-perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/dataproviders/*/*/Makefile.am
+perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
+perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/*/Makefile.am
+perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/*/*/Makefile.am
 
 # install pkgconfig file to /usr/share/pkgconfig instead of libdir/pkgconfig
 perl -pi -e 's,\$\(libdir\)/pkgconfig,\$\(datadir\)/pkgconfig,g' data/Makefile.am
 
 # ...and correct the paths in it to match the changes we made above
-perl -pi -e 's,\@libdir\@/conduit/dataproviders,\@exec_prefix\@/lib/conduit/dataproviders,g' data/conduit.pc.in
+perl -pi -e 's.MODULEDIR, \$libdir.MODULEDIR, \$exec_prefix/lib.g' configure.ac
 
 # correct start_conduit.py for the changes made above
 perl -pi -e 's.LIBDIR, \$libdir.LIBDIR, \$exec_prefix/lib.g' configure.ac
