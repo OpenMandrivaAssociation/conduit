@@ -1,5 +1,5 @@
 %define name	conduit
-%define version	0.3.5
+%define version	0.3.6
 %define svn	0
 %if %svn
 %define release	%mkrel 0.%svn.1
