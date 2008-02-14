@@ -11,6 +11,7 @@ Version:	0.3.7
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.conduit-project.org/
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
