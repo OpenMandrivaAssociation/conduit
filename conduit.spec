@@ -1,5 +1,3 @@
-%define name	conduit
-%define version	0.3.6
 %define svn	0
 %if %svn
 %define release	%mkrel 0.%svn.1
@@ -8,8 +6,8 @@
 %endif
 
 Summary:	Synchronization solution for GNOME
-Name:		%{name}
-Version:	%{version}
+Name:		conduit
+Version:	0.3.7
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -19,6 +17,18 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://files.conduit-project.org/releases/%{name}-%{version}.tar.bz2
 %endif
+
+# ATTENTION: be careful with these patches when doing a version bump
+# Upstream includes its own copies of these Python modules and uses
+# very recent versions: if our package is older than the version
+# upstream includes, and you cannot bump our package, it's probably
+# best to disable the appropriate patch rather than using our older
+# copy of the module - AdamW 2008/02
+
+# Use system python-libgmail
+Patch0:		conduit-0.3.7-systemlibgmail.patch
+# Use system python-gdata
+Patch1:		conduit-0.3.7-systemgdata.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -37,6 +47,8 @@ Requires:	python-vobject
 Requires:	python-pyxml
 Requires:	gnome-python-gtkmozembed
 Requires:	gnome-python-desktop
+Requires:	python-libgmail
+Requires:	python-gdata
 Suggests:	avahi-python
 Suggests:	python-twisted
 Suggests:	python-libgmail
@@ -62,6 +74,8 @@ your own webserver, and more.
 %else
 %setup -q
 %endif
+%patch0 -p1 -b .gmail
+%patch1 -p1 -b .gdata
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
 perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
