@@ -7,7 +7,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.7
+Version:	0.3.8
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
