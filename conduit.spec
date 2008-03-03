@@ -2,7 +2,7 @@
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %endif
 
 Summary:	Synchronization solution for GNOME
@@ -108,6 +108,11 @@ ACLOCAL="aclocal -I ./m4" autoreconf
 rm -rf %{buildroot}
 %makeinstall_std
 
+# Causes -devel dependencies if present, and isn't really useful as
+# there's nothing that builds against Conduit. Will re-introduce in a
+# -devel package if it becomes useful in future. - AdamW 2008/03
+rm -f %{buildroot}%{_datadir}/pkgconfig/%{name}.pc
+
 %find_lang %{name}
 
 %post
@@ -131,7 +136,6 @@ rm -rf %{buildroot}
 %{_prefix}/lib/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pkgconfig/%{name}.pc
 %{_datadir}/dbus-1/services/org.%{name}.service
 %{_datadir}/gnome/autostart/%{name}-autostart.desktop
 %{_iconsdir}/hicolor/*/*/*.png
