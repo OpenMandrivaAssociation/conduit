@@ -2,7 +2,7 @@
 %if %svn
 %define release	%mkrel 0.%svn.1
 %else
-%define release	%mkrel 2
+%define release	%mkrel 3
 %endif
 
 Summary:	Synchronization solution for GNOME
@@ -48,6 +48,7 @@ Requires:	python-vobject
 Requires:	python-pyxml
 Requires:	gnome-python-gtkmozembed
 Requires:	gnome-python-desktop
+Requires:	gnome-python-gconf
 Requires:	python-libgmail
 Requires:	python-gdata
 Suggests:	avahi-python
