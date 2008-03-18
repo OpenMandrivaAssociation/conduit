@@ -35,6 +35,7 @@ Patch1:		conduit-0.3.7-systemgdata.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
+BuildRequires:	python-dbus
 BuildRequires:	python
 BuildRequires:	perl-XML-Parser
 BuildRequires:	dbus-devel
