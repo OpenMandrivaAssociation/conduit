@@ -1,23 +1,25 @@
 %define svn	0
+%define rel	1
+
 %if %svn
-%define release	%mkrel 0.%svn.1
+%define release		%mkrel 0.%svn.%rel
+%define distname	%name-%svn.tar.lzma
+%define dirname		%name
 %else
-%define release	%mkrel 3
+%define release		%mkrel %rel
+%define distname	%name-%version.tar.bz2
+%define dirname		%name-%version
 %endif
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.8
+Version:	0.3.9
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.conduit-project.org/
-%if %svn
-Source0:	%{name}-%{svn}.tar.bz2
-%else
-Source0:	http://files.conduit-project.org/releases/%{name}-%{version}.tar.bz2
-%endif
+Source0:	http://files.conduit-project.org/releases/%{distname}
 
 # ATTENTION: be careful with these patches when doing a version bump
 # Upstream includes its own copies of these Python modules and uses
@@ -71,11 +73,7 @@ mobile phone, synchronize your bookmarks to delicious, gmail, or even
 your own webserver, and more.
 
 %prep
-%if %svn
-%setup -q -n %{name}
-%else
-%setup -q
-%endif
+%setup -q -n %{dirname}
 %patch0 -p1 -b .gmail
 %patch1 -p1 -b .gdata
 
