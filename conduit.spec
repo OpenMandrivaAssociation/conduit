@@ -13,7 +13,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.9
+Version:	0.3.10
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -28,10 +28,8 @@ Source0:	http://files.conduit-project.org/releases/%{distname}
 # best to disable the appropriate patch rather than using our older
 # copy of the module - AdamW 2008/02
 
-# Use system python-libgmail
-Patch0:		conduit-0.3.7-systemlibgmail.patch
 # Use system python-gdata
-Patch1:		conduit-0.3.7-systemgdata.patch
+Patch0:		conduit-0.3.10-systemgdata.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -75,8 +73,7 @@ your own webserver, and more.
 
 %prep
 %setup -q -n %{dirname}
-%patch0 -p1 -b .gmail
-%patch1 -p1 -b .gdata
+%patch0 -p1 -b .gdata
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
 perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
