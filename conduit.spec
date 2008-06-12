@@ -13,7 +13,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.10
+Version:	0.3.11.2
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -111,14 +111,6 @@ rm -rf %{buildroot}
 rm -f %{buildroot}%{_datadir}/pkgconfig/%{name}.pc
 
 %find_lang %{name}
-
-%post
-%{update_icon_cache hicolor}
-%{update_menus}
-
-%postun
-%{clean_icon_cache hicolor}
-%{clean_menus}
 
 %clean
 rm -rf %{buildroot}
