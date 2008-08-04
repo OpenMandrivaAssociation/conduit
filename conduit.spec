@@ -13,13 +13,13 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.12
+Version:	0.3.13
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.conduit-project.org/
-Source0:	http://files.conduit-project.org/releases/%{distname}
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{distname}
 
 # ATTENTION: be careful with these patches when doing a version bump
 # Upstream includes its own copies of these Python modules and uses
@@ -50,11 +50,9 @@ Requires:	python-pyxml
 Requires:	gnome-python-gtkmozembed
 Requires:	gnome-python-desktop
 Requires:	gnome-python-gconf
-Requires:	python-libgmail
 Requires:	python-gdata
 Suggests:	avahi-python
 Suggests:	python-twisted
-Suggests:	python-libgmail
 Suggests:	python-gpod
 Suggests:	ffmpeg
 Suggests:	mencoder
