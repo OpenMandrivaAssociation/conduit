@@ -13,7 +13,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.13.1
+Version:	0.3.14
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -30,6 +30,9 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{distname}
 
 # Use system python-gdata
 Patch0:		conduit-0.3.10-systemgdata.patch
+# Use webkit, not gtkmozembed and GIO, not gnomevfs - recommended by
+# upstream - AdamW 2008/09
+Patch1:		conduit-0.3.14-conf.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -47,10 +50,11 @@ Requires:	python-sqlite
 Requires:	python-pygoocanvas
 Requires:	python-vobject
 Requires:	python-pyxml
-Requires:	gnome-python-gtkmozembed
+Requires:	python-webkitgtk
 Requires:	gnome-python-desktop
 Requires:	gnome-python-gconf
 Requires:	python-gdata
+Requires:	python-gobject
 Suggests:	avahi-python
 Suggests:	python-twisted
 Suggests:	python-gpod
@@ -72,6 +76,7 @@ your own webserver, and more.
 %prep
 %setup -q -n %{dirname}
 %patch0 -p1 -b .gdata
+%patch1 -p1 -b .conf
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
 perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
@@ -102,6 +107,9 @@ ACLOCAL="aclocal -I ./m4" autoreconf
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+# The whole .real bit is only needed for Firefox, and we use Webkit...
+# - AdamW 2008/09
+mv -f %{buildroot}%{_bindir}/%{name}.real %{buildroot}%{_bindir}/%{name}
 
 # Causes -devel dependencies if present, and isn't really useful as
 # there's nothing that builds against Conduit. Will re-introduce in a
@@ -118,7 +126,6 @@ rm -rf %{buildroot}
 %doc AUTHORS NEWS README TODO
 %{_bindir}/%{name}
 %{_bindir}/%{name}-client
-%{_bindir}/%{name}.real
 %{py_puresitedir}/%{name}
 %{_prefix}/lib/%{name}
 %{_datadir}/%{name}
