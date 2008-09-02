@@ -33,6 +33,10 @@ Patch0:		conduit-0.3.10-systemgdata.patch
 # Use webkit, not gtkmozembed and GIO, not gnomevfs - recommended by
 # upstream - AdamW 2008/09
 Patch1:		conduit-0.3.14-conf.patch
+# Disable a couple of checks which don't seem to work on x86-64 as
+# written and really shouldn't be run at build time anyway - AdamW
+# 2008/09
+Patch2:		conduit-0.3.14-check.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -58,6 +62,8 @@ Requires:	python-gobject
 Suggests:	avahi-python
 Suggests:	python-twisted
 Suggests:	python-gpod
+Suggests:	python-feedparser
+Suggests:	gnome-python-evolution
 Suggests:	ffmpeg
 Suggests:	mencoder
 
@@ -77,6 +83,7 @@ your own webserver, and more.
 %setup -q -n %{dirname}
 %patch0 -p1 -b .gdata
 %patch1 -p1 -b .conf
+%patch2 -p1 -b .check
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
 perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
