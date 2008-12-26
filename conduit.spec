@@ -50,7 +50,6 @@ BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-common
 %endif
 BuildArch:	noarch
-Requires:	python-sqlite
 Requires:	python-pygoocanvas
 Requires:	python-vobject
 Requires:	python-pyxml
