@@ -29,7 +29,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{distname}
 # copy of the module - AdamW 2008/02
 
 # Use system python-gdata
-Patch0:		conduit-0.3.10-systemgdata.patch
+Patch0:		conduit-0.3.15-systemgdata.patch
 # Use webkit, not gtkmozembed and GIO, not gnomevfs - recommended by
 # upstream - AdamW 2008/09
 Patch1:		conduit-0.3.14-conf.patch
