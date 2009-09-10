@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	2
+%define rel	3
 
 %if %svn
 %define release		%mkrel 0.%svn.%rel
