@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	3
+%define rel	1
 
 %if %svn
 %define release		%mkrel 0.%svn.%rel
@@ -13,7 +13,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.15
+Version:	0.3.16
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -30,9 +30,6 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{distname}
 
 # Use system python-gdata
 Patch0:		conduit-0.3.15-systemgdata.patch
-# Use webkit, not gtkmozembed and GIO, not gnomevfs - recommended by
-# upstream - AdamW 2008/09
-Patch1:		conduit-0.3.14-conf.patch
 # Disable a couple of checks which don't seem to work on x86-64 as
 # written and really shouldn't be run at build time anyway - AdamW
 # 2008/09
@@ -81,7 +78,6 @@ your own webserver, and more.
 %prep
 %setup -q -n %{dirname}
 %patch0 -p1 -b .gdata
-%patch1 -p1 -b .conf
 %patch2 -p1 -b .check
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
@@ -137,7 +133,6 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/dbus-1/services/org.%{name}.service
-%{_datadir}/gnome/autostart/%{name}-autostart.desktop
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_datadir}/gnome/help/%{name}
