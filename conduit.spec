@@ -13,7 +13,7 @@
 
 Summary:	Synchronization solution for GNOME
 Name:		conduit
-Version:	0.3.16
+Version:	0.3.17
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
@@ -21,19 +21,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.conduit-project.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{distname}
 
-# ATTENTION: be careful with these patches when doing a version bump
-# Upstream includes its own copies of these Python modules and uses
-# very recent versions: if our package is older than the version
-# upstream includes, and you cannot bump our package, it's probably
-# best to disable the appropriate patch rather than using our older
-# copy of the module - AdamW 2008/02
-
-# Use system python-gdata
-Patch0:		conduit-0.3.15-systemgdata.patch
-# Disable a couple of checks which don't seem to work on x86-64 as
-# written and really shouldn't be run at build time anyway - AdamW
-# 2008/09
-Patch2:		conduit-0.3.14-check.patch
 BuildRequires:	python-pygoocanvas
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-vobject
@@ -77,8 +64,6 @@ your own webserver, and more.
 
 %prep
 %setup -q -n %{dirname}
-%patch0 -p1 -b .gdata
-%patch2 -p1 -b .check
 
 # install plugins to /usr/lib regardless of arch: they are arch-independent
 perl -pi -e 's,\$\(libdir\)/conduit,\$\(exec_prefix\)/lib/conduit,g' conduit/modules/Makefile.am
