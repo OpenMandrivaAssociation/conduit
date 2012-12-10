@@ -123,3 +123,135 @@ rm -rf %{buildroot}
 %{_datadir}/gnome/help/%{name}
 %{_datadir}/omf/%{name}
 
+
+
+%changelog
+* Sat Nov 06 2010 Jani Välimaa <wally@mandriva.org> 0.3.17-2mdv2011.0
++ Revision: 594338
+- rebuild for python 2.7
+
+  + Frederik Himpe <fhimpe@mandriva.org>
+    - Update to new version 0.3.17
+    - Remove systemgdata patch: integrated upstream
+    - Remove check patch: not needed anymore
+
+* Wed Nov 11 2009 Pascal Terjan <pterjan@mandriva.org> 0.3.16-1mdv2010.1
++ Revision: 464612
+- Update to 0.3.16
+- Drop P1, these are now default settings
+- Update P0 and P2
+
+* Thu Sep 10 2009 Thierry Vignaud <tv@mandriva.org> 0.3.15-3mdv2010.0
++ Revision: 437100
+- rebuild
+
+* Fri Dec 26 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.15-2mdv2009.1
++ Revision: 319504
+- rediff systemgdata.patch
+- drop python-sqlite require, it actually can use python 2.5's own internal
+  module
+- rebuild with python 2.6
+
+* Tue Oct 21 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.15-1mdv2009.1
++ Revision: 296329
+- new release 0.3.15
+
+* Tue Sep 02 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.14-1mdv2009.0
++ Revision: 279281
+- add a couple of useful suggests (RSS and Evo support)
+- add check.patch to disable a couple of buildtime checks that should really
+  be runtime checks and break on x86-64
+- drop conduit.real, it's not needed (and breaks stuff) when using webkit
+- require python-webkit and python-gobject
+- replace webkit.patch with conf.patch: now also use GIO instead of gnomevfs
+- new release 0.3.14
+
+* Sun Aug 10 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.13.1-1mdv2009.0
++ Revision: 270398
+- new release 0.3.13.1
+
+* Mon Aug 04 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.13-1mdv2009.0
++ Revision: 263564
+- drop python-libgmail dependencies (conduit doesn't use it any more)
+- new release 0.3.13
+
+* Sun Jul 20 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.12-1mdv2009.0
++ Revision: 239241
+- new release 0.3.12
+
+* Thu Jun 12 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.11.2-1mdv2009.0
++ Revision: 218276
+- drop %%post and %%postun stuff now handled by triggers
+- new release 0.3.11.2
+
+* Sat May 03 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.10-1mdv2009.0
++ Revision: 200536
+- rediff systemgdata.patch
+- drop systemlibgmail.patch (seems upstream isn't using libgmail at all any more)
+- new release 0.3.10
+
+* Tue Mar 18 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.9-1mdv2008.1
++ Revision: 188648
+- buildrequires python-dbus
+- prettify svn conditionals
+- new release 0.3.9
+
+* Thu Mar 06 2008 Gustavo De Nardin <gustavodn@mandriva.com> 0.3.8-3mdv2008.1
++ Revision: 180283
+- fixed missing Requires on gnome-python-gconf
+
+* Mon Mar 03 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.8-2mdv2008.1
++ Revision: 178143
+- fix #38339 (dependencies on -devel packages) by removing pkgconfig file. Will re-introduce in a -devel package in future if it actually becomes needed.
+
+* Fri Feb 29 2008 Guillaume Rousse <guillomovitch@mandriva.org> 0.3.8-1mdv2008.1
++ Revision: 176942
+- new version
+
+* Thu Feb 14 2008 Thierry Vignaud <tv@mandriva.org> 0.3.7-1mdv2008.1
++ Revision: 167835
+- fix no-buildroot-tag
+
+  + Adam Williamson <awilliamson@mandriva.org>
+    - add systemgdata.patch and systemlibgmail.patch: use system copies of two python modules instead of internal copies
+    - new release 0.3.7
+
+* Mon Feb 04 2008 Colin Guthrie <cguthrie@mandriva.org> 0.3.6-1mdv2008.1
++ Revision: 162048
+- new version 0.3.6
+
+* Tue Jan 15 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.5-1mdv2008.1
++ Revision: 153296
+- minor spec clean
+- adjust the noarch adaptations for upstream changes
+- drop mozpath.patch (merged upstream)
+- new release 0.3.5
+
+* Sun Jan 06 2008 Adam Williamson <awilliamson@mandriva.org> 0.3.4-3mdv2008.1
++ Revision: 146105
+- requires python-pyxml (#36442)
+
+* Mon Oct 22 2007 Adam Williamson <awilliamson@mandriva.org> 0.3.4-2mdv2008.1
++ Revision: 101295
+- add conduit-0.3.4-mozpath.patch , from upstream SVN, to (hackily) find the Mozilla location so the internal browser works
+
+* Tue Oct 16 2007 Adam Williamson <awilliamson@mandriva.org> 0.3.4-1mdv2008.1
++ Revision: 99074
+- correct buildrequires (no longer needs imagemagick, now needs gnome-doc-utils)
+- adjust file list
+- found a good fix for the borked autotools stuff
+- drop various icon stuff in spec as upstream now does icons correctly
+- drop a superfluous substitution
+- new release 0.3.4
+- use automake only...autoreconf is failing
+- new release 0.3.4
+
+* Thu Sep 06 2007 Adam Williamson <awilliamson@mandriva.org> 0.3.3-2mdv2008.0
++ Revision: 80571
+- add some requires
+- add a comment
+
+* Wed Aug 22 2007 Adam Williamson <awilliamson@mandriva.org> 0.3.3-1mdv2008.0
++ Revision: 68804
+- Import conduit
+
