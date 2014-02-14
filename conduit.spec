@@ -11,6 +11,7 @@ BuildRequires:	python-dbus
 BuildRequires:	python-pygoocanvas
 BuildRequires:	python-vobject
 BuildRequires:	perl-XML-Parser
+BuildRequires:	rarian
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(gnome-doc-utils)
 BuildRequires:	pkgconfig(pygtk-2.0)
