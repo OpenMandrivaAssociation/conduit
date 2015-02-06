@@ -1,7 +1,7 @@
 Summary:	Synchronization solution for GNOME
 Name:		conduit
 Version:	0.3.17
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Communications
 Url:		http://www.conduit-project.org/
