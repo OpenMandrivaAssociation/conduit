@@ -4,7 +4,7 @@ Version:	0.3.17
 Release:	4
 License:	GPLv2+
 Group:		Communications
-Url:		http://www.conduit-project.org/
+Url:		https://www.conduit-project.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{name}-%{version}.tar.bz2
 BuildRequires:	intltool
 BuildRequires:	python-dbus
