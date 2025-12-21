@@ -6,6 +6,11 @@ License:	GPLv2+
 Group:		Communications
 Url:		https://www.conduit-project.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/conduit/0.3/%{name}-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	intltool
 BuildRequires:	python-dbus
 BuildRequires:	python-pygoocanvas
